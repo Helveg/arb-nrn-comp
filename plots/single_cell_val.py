@@ -5,6 +5,7 @@ import os
 import time
 import pickle
 import dbbs_models
+import arbor
 from arbor import single_cell_model
 
 def plot():
