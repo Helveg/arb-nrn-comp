@@ -19,7 +19,8 @@ def plot():
             cell = model()
             time = p.time
             dbbs_models.test.quick_test(cell, duration=1000)
-            nrn_data[name] = (list(time), list(cell.Vm))
-            arb_data[name] = go.Figure(go.Scatter(x=nrn_data[name][0], y=nrn_data[name][1]))
+            pkl_data[name] = (list(time), list(cell.Vm))
+            nrn_data[name] = go.Figure(go.Scatter(x=nrn_data[name][0], y=nrn_data[name][1]))
     with open("nrn_sc.pkl", "wb") as f:
         pickle.dump(pkl_data, f)
+    return nrn_data
