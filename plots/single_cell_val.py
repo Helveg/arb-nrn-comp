@@ -7,9 +7,11 @@ import pickle
 import dbbs_models
 import arbor
 from arbor import single_cell_model
+import pickle
 
 def plot():
     arb_data = {}
+    pkl_data = {}
     for name, model in vars(dbbs_models).items():
         if name.endswith("Cell"):
             print("Running", name, flush=True)
@@ -20,5 +22,8 @@ def plot():
             arb_model.properties.catalogue = model.get_catalogue()
             arb_model.probe('voltage', '"midpoint"', frequency=10)
             arb_model.run(10, dt=0.025)
-            arb_data[name] = go.Figure(go.Scatter(x=m.traces[0].time, y=m.traces[0].value))
+            arb_data[name] = go.Figure(go.Scatter(x=arb_model.traces[0].time, y=arb_model.traces[0].value))
+            pkl_data[name] = (arb_model.traces[0].time, arb_model.traces[0].value)
+    with open("arb_sc.pkl", "wb") as f:
+        pickle.dump(pkl_data, f)
     return arb_data
