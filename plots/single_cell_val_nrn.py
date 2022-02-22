@@ -14,7 +14,7 @@ def plot():
     pkl_data = {}
     for name, model in vars(dbbs_models).items():
         if name.endswith("Cell"):
-            print("Running", name)
+            print("Running", name, flush=True)
             nrn_data[name] = []
             cell = model()
             time = p.time
