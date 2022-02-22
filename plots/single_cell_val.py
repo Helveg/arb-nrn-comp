@@ -19,7 +19,6 @@ def plot():
             )
             arb_model.properties.catalogue = model.get_catalogue()
             arb_model.probe('voltage', '"midpoint"', frequency=10)
-            cell = model()
             arb_model.run(10, dt=0.025)
             arb_data[name] = go.Figure(go.Scatter(x=m.traces[0].time, y=m.traces[0].value))
     return arb_data
